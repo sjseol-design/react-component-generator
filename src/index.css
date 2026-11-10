@@ -1,0 +1,76 @@
+@font-face {
+  font-family: 'Galmuri11';
+  font-weight: 400;
+  font-display: swap;
+  src: url('galmuri/dist/Galmuri11.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'Galmuri11';
+  font-weight: 700;
+  font-display: swap;
+  src: url('galmuri/dist/Galmuri11-Bold.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'GalmuriMono11';
+  font-weight: 400;
+  font-display: swap;
+  src: url('galmuri/dist/GalmuriMono11.woff2') format('woff2');
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  color-scheme: light;
+  font-synthesis: none;
+  --desk: #0055aa;
+  --desk-dot: #004690;
+  --ink: #0b1d3a;
+  --paper: #ffffff;
+  --paper-dim: #dfe4ec;
+  --orange: #ff8800;
+  --orange-deep: #d96f00;
+  --danger: #c2260c;
+  --ok: #0a7a3b;
+  --font: 'Galmuri11', 'Malgun Gothic', 'Apple SD Gothic Neo', sans-serif;
+  --font-mono: 'GalmuriMono11', Consolas, monospace;
+}
+
+body {
+  min-height: 100vh;
+  font-family: var(--font);
+  font-size: 16px;
+  line-height: 1.6;
+  color: var(--ink);
+  background-color: var(--desk);
+  background-image: radial-gradient(var(--desk-dot) 1.5px, transparent 1.5px);
+  background-size: 8px 8px;
+  -webkit-font-smoothing: none;
+  font-smooth: never;
+}
+
+button,
+input,
+select,
+textarea {
+  font: inherit;
+  color: inherit;
+  border-radius: 0;
+}
+
+button {
+  -webkit-tap-highlight-color: transparent;
+}
+
+:focus-visible {
+  outline: 3px solid var(--ink);
+  outline-offset: 2px;
+}
+
+::selection {
+  background: var(--orange);
+  color: var(--ink);
+}

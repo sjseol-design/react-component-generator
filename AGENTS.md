@@ -16,6 +16,7 @@
 
 - API 키(`ANTHROPIC_API_KEY`, `GOOGLE_API_KEY`)를 클라이언트로 내려보내지 마라. `/api/config`는 키 존재 여부(boolean)만 반환한다 (`server/index.ts:147-157`).
 - `.env`는 커밋하지 마라 (`.gitignore`, `.worktreeinclude`에 명시).
+- `.env`, `.env.*`, 인증서/키(`*.pem`, `*.key`), `*credential*`, `*secret*` 등 민감 파일은 읽기·수정·생성 모두 금지한다. `.claude/settings.json`의 `permissions.deny`로 강제되며, 이 규칙을 완화하거나 우회(Bash로 `cat` 등)하지 마라. 환경변수 값이 필요하면 사용자에게 요청한다.
 - 생성 코드는 react-live `noInline` 모드로 실행된다 (`src/components/LivePreview.tsx:71`). 이 모드는 `render(<Component />)` 호출이 없으면 아무것도 그리지 않는다.
 
 ### Do's & Don'ts

@@ -578,3 +578,21 @@
     padding: 18px;
   }
 }
+
+.prompt-meta {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 12px;
+  font-size: 12px;
+}
+
+.prompt-error {
+  margin: 0;
+  color: #c0392b;
+}
+
+.prompt-counter-over {
+  color: #c0392b;
+  font-weight: bold;
+}

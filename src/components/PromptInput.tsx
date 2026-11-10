@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { validatePromptLength, MAX_PROMPT_LENGTH } from '../utils/validatePrompt';
 
 interface PromptInputProps {
   onGenerate: (prompt: string) => void;
@@ -16,10 +17,11 @@ const EXAMPLES = [
 
 export function PromptInput({ onGenerate, isLoading }: PromptInputProps) {
   const [prompt, setPrompt] = useState('');
+  const { valid, length, error } = validatePromptLength(prompt);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    if (prompt.trim() && !isLoading) {
+    if (prompt.trim() && valid && !isLoading) {
       onGenerate(prompt.trim());
     }
   };
@@ -37,6 +39,7 @@ export function PromptInput({ onGenerate, isLoading }: PromptInputProps) {
           placeholder="예: 고객 목록 테이블 위에 들어갈 검색 필터 바를 만들어줘. 상태, 담당자, 날짜 범위 필터가 필요해."
           className="prompt-textarea"
           rows={3}
+          aria-invalid={!valid}
           onKeyDown={(e) => {
             if (e.key === 'Enter' && (e.metaKey || e.ctrlKey)) {
               handleSubmit(e);
@@ -46,7 +49,7 @@ export function PromptInput({ onGenerate, isLoading }: PromptInputProps) {
         <button
           type="submit"
           className="btn-generate"
-          disabled={!prompt.trim() || isLoading}
+          disabled={!prompt.trim() || !valid || isLoading}
         >
           {isLoading ? (
             <span className="loading-spinner">생성 중...</span>
@@ -54,6 +57,16 @@ export function PromptInput({ onGenerate, isLoading }: PromptInputProps) {
             '컴포넌트 생성'
           )}
         </button>
+        <div className="prompt-meta">
+          {error && (
+            <p role="alert" className="prompt-error">
+              {error}
+            </p>
+          )}
+          <span className={`prompt-counter${valid ? '' : ' prompt-counter-over'}`}>
+            {length} / {MAX_PROMPT_LENGTH}
+          </span>
+        </div>
       </form>
       <div className="prompt-examples">
         <span className="examples-label">이런 걸 만들어볼 수 있어요</span>
